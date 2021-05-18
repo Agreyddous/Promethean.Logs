@@ -5,6 +5,8 @@ namespace Promethean.Logs.Contracts
 {
 	public interface ILogService : IDisposable
 	{
+		int Count { get; }
+
 		TLogService SetMinimumLevel<TLogService>(LogLevel minimumLevel) where TLogService : class, ILogService;
 		TLogService SetLogger<TLogService>(ILogger logger) where TLogService : class, ILogService;
 

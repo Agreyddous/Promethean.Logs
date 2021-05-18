@@ -23,6 +23,8 @@ namespace Promethean.Logs.Services
 			MinimumLevel = LogLevel.Error;
 		}
 
+		public int Count => _logs.Count;
+
 		public TLogService SetMinimumLevel<TLogService>(LogLevel minimumLevel) where TLogService : class, ILogService
 		{
 			MinimumLevel = minimumLevel;
@@ -51,7 +53,7 @@ namespace Promethean.Logs.Services
 
 		protected virtual void AddLog(Log log)
 		{
-			if (log.Level > MinimumLevel && log.Level != LogLevel.None)
+			if (log.Level >= MinimumLevel && log.Level != LogLevel.None)
 				_logs.Add(log);
 		}
 
