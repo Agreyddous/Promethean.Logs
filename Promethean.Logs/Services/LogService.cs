@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using Promethean.Logs.Contracts;
 using Promethean.Logs.Entities;
 using Promethean.Logs.Extensions;
 
@@ -13,31 +12,21 @@ namespace Promethean.Logs.Services
 		protected readonly Guid ScopeId;
 		private readonly IList<Log> _logs;
 
-		protected LogLevel MinimumLevel;
-		private ILogger _logger;
+		private ILogger<LogService> _logger;
 
-		public LogService()
+		public static LogLevel MinimumLevel { get; set; }
+
+		public LogService(ILogger<LogService> logger)
 		{
 			ScopeId = Guid.NewGuid();
 			_logs = new List<Log>();
-			MinimumLevel = LogLevel.Error;
+
+			_logger = logger;
 		}
 
 		public int Count => _logs.Count;
 
-		public TLogService SetMinimumLevel<TLogService>(LogLevel minimumLevel) where TLogService : class, ILogService
-		{
-			MinimumLevel = minimumLevel;
-
-			return this as TLogService;
-		}
-
-		public TLogService SetLogger<TLogService>(ILogger logger) where TLogService : class, ILogService
-		{
-			_logger = logger;
-
-			return this as TLogService;
-		}
+		public void SetMinimumLevel(LogLevel minimumLevel) => MinimumLevel = minimumLevel;
 
 		public void Log<TInvoker>(string message, string method, object data, LogLevel level = LogLevel.Information) => AddLog(new Log(ScopeId, message, level, typeof(TInvoker).FullName, method, JsonSerializer.Serialize(data)));
 

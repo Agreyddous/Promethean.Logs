@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Promethean.Logs.Contracts;
 using Promethean.Logs.Services;
 
 namespace Promethean.Logs.Tests.Services
@@ -12,12 +11,12 @@ namespace Promethean.Logs.Tests.Services
 		private ILogService _logService;
 
 		[TestInitialize]
-		public void Setup() => _logService = new LogService().SetLogger<LogService>(LoggerFactory.Create(builder => { }).CreateLogger<LogServiceTests>());
+		public void Setup() => _logService = new LogService(LoggerFactory.Create(builder => { }).CreateLogger<LogService>());
 
 		[TestMethod("Log something with a lower level than the minimum configured, should not add the log message")]
 		public void LogLowerLevelThanMinimum()
 		{
-			_logService.SetMinimumLevel<LogService>(LogLevel.Critical);
+			_logService.SetMinimumLevel(LogLevel.Critical);
 
 			_logService.Log<LogServiceTests>(Faker.Lorem.Sentence(), Faker.Lorem.Sentence(), new object(), LogLevel.Information);
 
@@ -27,7 +26,7 @@ namespace Promethean.Logs.Tests.Services
 		[TestMethod("Log something with same level than the minimum configured, should add the log message")]
 		public void LogSameLevelThanMinimum()
 		{
-			_logService.SetMinimumLevel<LogService>(LogLevel.Information);
+			_logService.SetMinimumLevel(LogLevel.Information);
 
 			_logService.Log<LogServiceTests>(Faker.Lorem.Sentence(), Faker.Lorem.Sentence(), new object(), LogLevel.Information);
 
@@ -37,7 +36,7 @@ namespace Promethean.Logs.Tests.Services
 		[TestMethod("Log something with higher level than the minimum configured, should add the log message")]
 		public void LogHigherLevelThanMinimum()
 		{
-			_logService.SetMinimumLevel<LogService>(LogLevel.Information);
+			_logService.SetMinimumLevel(LogLevel.Information);
 
 			_logService.Log<LogServiceTests>(Faker.Lorem.Sentence(), Faker.Lorem.Sentence(), new object(), LogLevel.Critical);
 
