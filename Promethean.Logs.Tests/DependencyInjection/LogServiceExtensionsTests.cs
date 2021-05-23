@@ -28,7 +28,7 @@ namespace Promethean.Logs.Tests.DependencyInjection
 		[TestMethod("Log a Critical message, should add the log message")]
 		public void HandleValidRegisteredCommandAndResult()
 		{
-			ILogService logService = GetService<ILogService>();
+			ILogService logService = _getService<ILogService>();
 
 			logService.Log<LogServiceExtensionsTests>(Faker.Lorem.Sentence(), nameof(HandleValidRegisteredCommandAndResult), new { }, LogLevel.Critical);
 
@@ -38,6 +38,6 @@ namespace Promethean.Logs.Tests.DependencyInjection
 		[TestCleanup]
 		public void Cleanup() => _serviceProvider.Dispose();
 
-		private TService GetService<TService>() => _serviceScope.ServiceProvider.GetService<TService>();
+		private TService _getService<TService>() => _serviceScope.ServiceProvider.GetService<TService>();
 	}
 }
