@@ -11,7 +11,7 @@ namespace Promethean.Logs.Extensions
 			string message = exception.Message;
 
 			if (exception.InnerException != null)
-				message += $"\n{exception.GetCompleteMessage()}";
+				message += $"\n{exception.InnerException.GetCompleteMessage()}";
 
 			return message;
 		}
