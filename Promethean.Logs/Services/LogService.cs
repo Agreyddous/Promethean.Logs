@@ -4,6 +4,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Promethean.Logs.Entities;
 using Promethean.Logs.Extensions;
+using Promethean.Logs.Services.Contracts;
 
 namespace Promethean.Logs.Services
 {

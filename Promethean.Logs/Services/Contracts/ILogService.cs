@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Promethean.Logs.Services
+namespace Promethean.Logs.Services.Contracts
 {
 	public interface ILogService : IDisposable
 	{

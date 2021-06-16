@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Promethean.Logs.DependencyInjection;
-using Promethean.Logs.Services;
+using Promethean.Logs.Services.Contracts;
 
 namespace Promethean.Logs.Tests.DependencyInjection
 {

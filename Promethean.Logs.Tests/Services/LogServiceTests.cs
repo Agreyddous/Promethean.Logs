@@ -2,6 +2,7 @@ using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Promethean.Logs.Services;
+using Promethean.Logs.Services.Contracts;
 
 namespace Promethean.Logs.Tests.Services
 {
